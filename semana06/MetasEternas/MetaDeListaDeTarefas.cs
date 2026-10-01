@@ -1,0 +1,60 @@
+using System;
+
+public class MetaDeListaDeTarefas : Meta
+{
+    private int _concluidas;
+    private int _total;
+    private int _bonus;
+
+    public MetaDeListaDeTarefas(string nome, string descricao, int pontos, int total, int bonus) 
+        : base(nome, descricao, pontos)
+    {
+        _total = total;
+        _bonus = bonus;
+        _concluidas = 0;
+    }
+
+    public MetaDeListaDeTarefas(string nome, string descricao, int pontos, int total, int bonus, int concluidas) 
+        : base(nome, descricao, pontos)
+    {
+        _total = total;
+        _bonus = bonus;
+        _concluidas = concluidas;
+    }
+
+    public int ObterBonus()
+    {
+        return _bonus;
+    }
+
+    public int ObterConcluidas()
+    {
+        return _concluidas;
+    }
+
+    public int ObterTotal()
+    {
+        return _total;
+    }
+
+    public override void RegistrarEvento()
+    {
+        _concluidas++;
+    }
+
+    public override bool EstaConcluida()
+    {
+        return _concluidas >= _total;
+    }
+
+    public override string ObterDetalhesEmTexto()
+    {
+        string status = EstaConcluida() ? "[X]" : "[ ]";
+        return $"{status} {_nome} ({_descricao}) -- Atualmente concluído: {_concluidas}/{_total}";
+    }
+
+    public override string ObterRepresentacaoEmTexto()
+    {
+        return $"MetaDeListaDeTarefas:{_nome},{_descricao},{_pontos},{_bonus},{_total},{_concluidas}";
+    }
+}

@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Olá, Mundo! Este é o Projeto MetasEternas.");
+        GerenciadorDeMetas gerenciador = new GerenciadorDeMetas();
+        gerenciador.Iniciar();
     }
 }
