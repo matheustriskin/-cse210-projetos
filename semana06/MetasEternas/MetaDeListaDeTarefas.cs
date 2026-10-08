@@ -50,11 +50,11 @@ public class MetaDeListaDeTarefas : Meta
     public override string ObterDetalhesEmTexto()
     {
         string status = EstaConcluida() ? "[X]" : "[ ]";
-        return $"{status} {_nome} ({_descricao}) -- Atualmente concluído: {_concluidas}/{_total}";
+        return $"{status} {ObterNome()} ({ObterDescricao()}) -- Atualmente concluído: {_concluidas}/{_total}";
     }
 
     public override string ObterRepresentacaoEmTexto()
     {
-        return $"MetaDeListaDeTarefas:{_nome},{_descricao},{_pontos},{_bonus},{_total},{_concluidas}";
+        return $"MetaDeListaDeTarefas:{ObterNome()},{ObterDescricao()},{ObterPontos()},{_bonus},{_total},{_concluidas}";
     }
 }

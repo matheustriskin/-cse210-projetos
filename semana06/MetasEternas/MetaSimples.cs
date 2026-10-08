@@ -26,6 +26,6 @@ public class MetaSimples : Meta
 
     public override string ObterRepresentacaoEmTexto()
     {
-        return $"MetaSimples:{_nome},{_descricao},{_pontos},{_estaConcluida}";
+        return $"MetaSimples:{ObterNome()},{ObterDescricao()},{ObterPontos()},{_estaConcluida}";
     }
 }

@@ -2,9 +2,9 @@ using System;
 
 public abstract class Meta
 {
-    protected string _nome;
-    protected string _descricao;
-    protected int _pontos;
+    private string _nome;
+    private string _descricao;
+    private int _pontos;
 
     public Meta(string nome, string descricao, int pontos)
     {
@@ -16,6 +16,11 @@ public abstract class Meta
     public string ObterNome()
     {
         return _nome;
+    }
+
+    public string ObterDescricao()
+    {
+        return _descricao;
     }
 
     public int ObterPontos()

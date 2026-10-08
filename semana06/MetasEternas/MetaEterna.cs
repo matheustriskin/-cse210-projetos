@@ -8,8 +8,6 @@ public class MetaEterna : Meta
 
     public override void RegistrarEvento()
     {
-        // Metas eternas nunca são concluídas permanentemente,
-        // apenas continuam pontuando a cada registro.
     }
 
     public override bool EstaConcluida()
@@ -19,6 +17,6 @@ public class MetaEterna : Meta
 
     public override string ObterRepresentacaoEmTexto()
     {
-        return $"MetaEterna:{_nome},{_descricao},{_pontos}";
+        return $"MetaEterna:{ObterNome()},{ObterDescricao()},{ObterPontos()}";
     }
 }
