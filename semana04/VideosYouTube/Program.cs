@@ -8,48 +8,48 @@ class Program
         List<Video> videos = new List<Video>();
 
         // Vídeo 1
-        Video video1 = new Video("Como fazer bolo de chocolate", "Ana Cozinha", 360);
-        video1.AdicionarComentario(new Comentario("Carlos", "Incrível receita, tentei e ficou perfeito!"));
-        video1.AdicionarComentario(new Comentario("Maria", "Qual marca de chocolate você usa?"));
-        video1.AdicionarComentario(new Comentario("João", "Melhor canal de culinária do YouTube!"));
-        video1.AdicionarComentario(new Comentario("Fernanda", "Fiz ontem e todo mundo amou, obrigada!"));
+        Video video1 = new Video("Guia Completo de Git e GitHub para Iniciantes", "Código Eficiente", 780);
+        video1.AdicionarComentario(new Comentario("Mariana Silva", "Excelente explicação sobre branches e merge, salvou meu semestre!"));
+        video1.AdicionarComentario(new Comentario("Felipe Costa", "Direto ao ponto e sem enrolação, parabéns pelo conteúdo."));
+        video1.AdicionarComentario(new Comentario("Aline Duarte", "Você usa qual tema no terminal? Ficou muito bonito e legível."));
+        video1.AdicionarComentario(new Comentario("Rodrigo Santos", "Finalmente entendi a diferença entre git fetch e git pull!"));
         videos.Add(video1);
 
         // Vídeo 2
-        Video video2 = new Video("Treino HIIT para iniciantes", "Fit com Bruno", 720);
-        video2.AdicionarComentario(new Comentario("Lucas", "Esse treino é demais, já emagreci 3kg!"));
-        video2.AdicionarComentario(new Comentario("Patrícia", "Consegui terminar sem parar pela primeira vez!"));
-        video2.AdicionarComentario(new Comentario("Rafael", "Pode fazer todos os dias ou precisa descansar?"));
+        Video video2 = new Video("Como Montar um Setup Minimalista e Produtivo", "Tech & Design", 950);
+        video2.AdicionarComentario(new Comentario("Lucas Ferreira", "A organização dos cabos embaixo da mesa ficou impecável!"));
+        video2.AdicionarComentario(new Comentario("Beatriz Lima", "Onde você comprou esse suporte ergonômico de madeira para o teclado?"));
+        video2.AdicionarComentario(new Comentario("Gustavo Henrique", "Inspirador! Vou aplicar essa iluminação indireta no meu quarto hoje mesmo."));
         videos.Add(video2);
 
         // Vídeo 3
-        Video video3 = new Video("Top 10 destinos para 2025", "Viajando com Lena", 540);
-        video3.AdicionarComentario(new Comentario("Roberto", "Já fui ao número 3, é incrível mesmo!"));
-        video3.AdicionarComentario(new Comentario("Sofia", "Coloca o orçamento estimado para cada destino!"));
-        video3.AdicionarComentario(new Comentario("Diego", "Vídeo muito bem editado, parabéns!"));
-        video3.AdicionarComentario(new Comentario("Camila", "Adicionei todos na minha lista de viagens!"));
+        Video video3 = new Video("Receita de Pão Artesanal de Fermentação Natural", "Padaria em Casa", 1120);
+        video3.AdicionarComentario(new Comentario("Cláudia Ramos", "A casca ficou super crocante seguindo a dica da panela de ferro."));
+        video3.AdicionarComentario(new Comentario("Thiago Mendes", "Qual a hidratação ideal para utilizar com farinhas nacionais?"));
+        video3.AdicionarComentario(new Comentario("Juliana Castro", "Melhor tutorial que já assisti, meu primeiro levain deu super certo!"));
+        video3.AdicionarComentario(new Comentario("Renato Moreira", "Vídeo terapêutico e receita muito bem detalhada, nota 10!"));
         videos.Add(video3);
 
         // Vídeo 4
-        Video video4 = new Video("Programação orientada a objetos em C#", "Dev Tutoriais", 1200);
-        video4.AdicionarComentario(new Comentario("André", "Finalmente entendi o conceito de classes!"));
-        video4.AdicionarComentario(new Comentario("Bianca", "Você explica muito melhor que o meu professor."));
-        video4.AdicionarComentario(new Comentario("Thiago", "Poderia fazer um vídeo sobre herança?"));
+        Video video4 = new Video("Dicas Essenciais de Fotografia com Smartphone", "Olhar Criativo", 620);
+        video4.AdicionarComentario(new Comentario("Larissa Souza", "A regra dos terços e o uso da luz natural transformaram minhas fotos."));
+        video4.AdicionarComentario(new Comentario("Eduardo Paiva", "Sensacional a dica sobre travar o foco e ajustar a exposição manual."));
+        video4.AdicionarComentario(new Comentario("Camila Nogueira", "Adorei a parte de edição rápida sem precisar de aplicativos pagos!"));
         videos.Add(video4);
 
-        // Exibir todos os vídeos
+        // Exibir cada vídeo da lista
         foreach (Video video in videos)
         {
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Título:             {video.GetTitulo()}");
-            Console.WriteLine($"Autor:              {video.GetAutor()}");
-            Console.WriteLine($"Duração:            {video.GetDuracao()} segundos");
-            Console.WriteLine($"Nº de comentários:  {video.GetNumeroDeComentarios()}");
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine($"Título:                {video.ObterTitulo()}");
+            Console.WriteLine($"Autor:                 {video.ObterAutor()}");
+            Console.WriteLine($"Duração:               {video.ObterDuracao()} segundos");
+            Console.WriteLine($"Número de comentários: {video.ObterQuantidadeComentarios()}");
             Console.WriteLine("Comentários:");
 
-            foreach (Comentario comentario in video.GetComentarios())
+            foreach (Comentario comentario in video.ObterComentarios())
             {
-                Console.WriteLine($"  - {comentario.GetNome()}: {comentario.GetTexto()}");
+                Console.WriteLine($"  - {comentario.ObterAutor()}: \"{comentario.ObterConteudo()}\"");
             }
 
             Console.WriteLine();

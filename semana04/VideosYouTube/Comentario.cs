@@ -1,21 +1,23 @@
+using System;
+
 public class Comentario
 {
-    private string _nome;
-    private string _texto;
+    private string _autorComentario;
+    private string _conteudoTexto;
 
-    public Comentario(string nome, string texto)
+    public Comentario(string autorComentario, string conteudoTexto)
     {
-        _nome = nome;
-        _texto = texto;
+        _autorComentario = autorComentario;
+        _conteudoTexto = conteudoTexto;
     }
 
-    public string GetNome()
+    public string ObterAutor()
     {
-        return _nome;
+        return _autorComentario;
     }
 
-    public string GetTexto()
+    public string ObterConteudo()
     {
-        return _texto;
+        return _conteudoTexto;
     }
 }
