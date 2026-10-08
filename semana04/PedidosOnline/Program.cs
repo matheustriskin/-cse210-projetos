@@ -5,67 +5,67 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Garante formatação consistente com ponto para moeda (USD)
+        // Garante formatação monetária com ponto decimal (padrão USD)
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 
-        Console.WriteLine("=================================================");
-        Console.WriteLine("     SISTEMA DE GESTÃO DE PEDIDOS ONLINE        ");
-        Console.WriteLine("=================================================");
+        Console.WriteLine("==================================================");
+        Console.WriteLine("        SISTEMA DE PROCESSAMENTO DE PEDIDOS       ");
+        Console.WriteLine("==================================================");
         Console.WriteLine();
 
         // -------------------------------------------------------------
-        // Pedido 1: Cliente localizado nos EUA (Custo de envio: $5.00)
+        // Pedido 1: Cliente nos Estados Unidos (Taxa de envio: $5.00)
         // -------------------------------------------------------------
-        Endereco endereco1 = new Endereco("1725 Slough Ave, Suite 100", "Scranton", "PA", "USA");
-        Cliente cliente1 = new Cliente("Michael Scott", endereco1);
+        Endereco endereco1 = new Endereco("742 Evergreen Terrace", "Springfield", "OR", "USA");
+        Cliente cliente1 = new Cliente("Lucas Miller", endereco1);
         Pedido pedido1 = new Pedido(cliente1);
 
-        pedido1.AdicionarProduto(new Produto("Caneca World's Best Boss", "DNDR-001", 14.99m, 2));
-        pedido1.AdicionarProduto(new Produto("Caixa de Papel Carta Dunder Mifflin", "DNDR-042", 8.50m, 4));
-        pedido1.AdicionarProduto(new Produto("Grampeador de Mesa Premium", "DNDR-777", 12.00m, 1));
+        pedido1.AdicionarItem(new Produto("Fone de Ouvido Bluetooth Pro", "AUD-501", 45.00m, 2));
+        pedido1.AdicionarItem(new Produto("Carregador Rápido USB-C 65W", "PWR-208", 18.50m, 1));
+        pedido1.AdicionarItem(new Produto("Suporte Articulado para Monitor", "MNT-104", 32.00m, 1));
 
-        ExibirDetalhesPedido(1, pedido1);
+        ExibirPedido(1, pedido1);
 
         Console.WriteLine();
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine(new string('-', 50));
         Console.WriteLine();
 
         // -------------------------------------------------------------
-        // Pedido 2: Cliente localizado fora dos EUA (Custo de envio: $35.00)
+        // Pedido 2: Cliente fora dos Estados Unidos (Taxa de envio: $35.00)
         // -------------------------------------------------------------
-        Endereco endereco2 = new Endereco("Av. Paulista, 1578 - Bela Vista", "São Paulo", "SP", "Brasil");
-        Cliente cliente2 = new Cliente("Ana Beatriz Ramos", endereco2);
+        Endereco endereco2 = new Endereco("Rua das Flores, 450, Apto 302", "Curitiba", "PR", "Brasil");
+        Cliente cliente2 = new Cliente("Carolina Mendes", endereco2);
         Pedido pedido2 = new Pedido(cliente2);
 
-        pedido2.AdicionarProduto(new Produto("Teclado Mecânico Gamer RGB", "TECH-101", 65.00m, 1));
-        pedido2.AdicionarProduto(new Produto("Mouse Ergonômico Sem Fio", "TECH-204", 28.50m, 2));
-        pedido2.AdicionarProduto(new Produto("Mousepad Extra Grande Speed", "TECH-310", 19.90m, 1));
+        pedido2.AdicionarItem(new Produto("Teclado Mecânico Compacto RGB", "KEY-801", 69.90m, 1));
+        pedido2.AdicionarItem(new Produto("Mousepad Gamer Extra Grande", "PAD-305", 19.50m, 2));
+        pedido2.AdicionarItem(new Produto("Mouse Sem Fio Ergonômico", "MOU-112", 28.00m, 1));
 
-        ExibirDetalhesPedido(2, pedido2);
+        ExibirPedido(2, pedido2);
 
         Console.WriteLine();
-        Console.WriteLine("=================================================");
-        Console.WriteLine("           FIM DO PROCESSAMENTO                 ");
-        Console.WriteLine("=================================================");
+        Console.WriteLine("==================================================");
+        Console.WriteLine("             PROCESSAMENTO CONCLUÍDO              ");
+        Console.WriteLine("==================================================");
     }
 
-    static void ExibirDetalhesPedido(int numeroPedido, Pedido pedido)
+    static void ExibirPedido(int numero, Pedido pedido)
     {
-        Console.WriteLine($"PEDIDO #{numeroPedido}");
+        Console.WriteLine($"PEDIDO #{numero}");
         Console.WriteLine();
 
-        // Etiqueta de Embalagem
-        Console.WriteLine(pedido.ObterEtiquetaEmbalagem());
+        // 1. Etiqueta de Embalagem (Nome e ID de cada produto)
+        Console.WriteLine(pedido.GerarEtiquetaEmbalagem());
         Console.WriteLine();
 
-        // Etiqueta de Envio
-        Console.WriteLine(pedido.ObterEtiquetaEnvio());
+        // 2. Etiqueta de Envio (Nome e Endereço do cliente)
+        Console.WriteLine(pedido.GerarEtiquetaEnvio());
         Console.WriteLine();
 
-        // Resumo Financeiro
-        Console.WriteLine("=== RESUMO DE CUSTOS ===");
-        Console.WriteLine($"Subtotal dos Produtos: ${pedido.ObterSubtotalProdutos():0.00}");
-        Console.WriteLine($"Taxa de Envio:         ${pedido.ObterCustoEnvio():0.00} {(pedido.ObterCliente().MoraNosEua() ? "(Nacional - EUA)" : "(Internacional)")}");
-        Console.WriteLine($"PREÇO TOTAL DO PEDIDO: ${pedido.CalcularCustoTotal():0.00}");
+        // 3. Preço Total do Pedido (Produtos + Taxa de Envio)
+        Console.WriteLine("--- RESUMO FINANCEIRO ---");
+        Console.WriteLine($"Subtotal dos Itens: ${pedido.CalcularSubtotal():0.00}");
+        Console.WriteLine($"Custo de Envio:     ${pedido.ObterTaxaEnvio():0.00} {(pedido.ObterCliente().MoraNosEua() ? "(EUA: $5.00)" : "(Internacional: $35.00)")}");
+        Console.WriteLine($"CUSTO TOTAL:        ${pedido.CalcularCustoTotal():0.00}");
     }
 }

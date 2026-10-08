@@ -3,21 +3,21 @@ using System;
 public class Produto
 {
     private string _nome;
-    private string _idProduto;
-    private decimal _preco;
+    private string _id;
+    private decimal _precoUnitario;
     private int _quantidade;
 
-    public Produto(string nome, string idProduto, decimal preco, int quantidade)
+    public Produto(string nome, string id, decimal precoUnitario, int quantidade)
     {
         _nome = nome;
-        _idProduto = idProduto;
-        _preco = preco;
+        _id = id;
+        _precoUnitario = precoUnitario;
         _quantidade = quantidade;
     }
 
-    public decimal CalcularCustoTotal()
+    public decimal ObterCustoTotal()
     {
-        return _preco * _quantidade;
+        return _precoUnitario * _quantidade;
     }
 
     public string ObterNome()
@@ -25,14 +25,14 @@ public class Produto
         return _nome;
     }
 
-    public string ObterIdProduto()
+    public string ObterId()
     {
-        return _idProduto;
+        return _id;
     }
 
-    public decimal ObterPreco()
+    public decimal ObterPrecoUnitario()
     {
-        return _preco;
+        return _precoUnitario;
     }
 
     public int ObterQuantidade()

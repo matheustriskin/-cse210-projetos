@@ -2,27 +2,27 @@ using System;
 
 public class Cliente
 {
-    private string _nome;
-    private Endereco _endereco;
+    private string _nomeCompleto;
+    private Endereco _enderecoResidencial;
 
-    public Cliente(string nome, Endereco endereco)
+    public Cliente(string nomeCompleto, Endereco enderecoResidencial)
     {
-        _nome = nome;
-        _endereco = endereco;
+        _nomeCompleto = nomeCompleto;
+        _enderecoResidencial = enderecoResidencial;
     }
 
     public bool MoraNosEua()
     {
-        return _endereco.EstaNosEua();
+        return _enderecoResidencial.EstaNosEua();
     }
 
     public string ObterNome()
     {
-        return _nome;
+        return _nomeCompleto;
     }
 
     public Endereco ObterEndereco()
     {
-        return _endereco;
+        return _enderecoResidencial;
     }
 }

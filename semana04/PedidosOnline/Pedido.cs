@@ -4,68 +4,68 @@ using System.Text;
 
 public class Pedido
 {
-    private List<Produto> _produtos;
-    private Cliente _cliente;
+    private List<Produto> _itensPedido;
+    private Cliente _clienteDestinatario;
 
-    public Pedido(Cliente cliente)
+    public Pedido(Cliente clienteDestinatario)
     {
-        _cliente = cliente;
-        _produtos = new List<Produto>();
+        _clienteDestinatario = clienteDestinatario;
+        _itensPedido = new List<Produto>();
     }
 
-    public void AdicionarProduto(Produto produto)
+    public void AdicionarItem(Produto produto)
     {
-        _produtos.Add(produto);
+        _itensPedido.Add(produto);
     }
 
-    public decimal ObterCustoEnvio()
+    public decimal ObterTaxaEnvio()
     {
-        return _cliente.MoraNosEua() ? 5.00m : 35.00m;
+        return _clienteDestinatario.MoraNosEua() ? 5.00m : 35.00m;
     }
 
-    public decimal ObterSubtotalProdutos()
+    public decimal CalcularSubtotal()
     {
         decimal subtotal = 0m;
-        foreach (Produto produto in _produtos)
+        foreach (Produto item in _itensPedido)
         {
-            subtotal += produto.CalcularCustoTotal();
+            subtotal += item.ObterCustoTotal();
         }
         return subtotal;
     }
 
     public decimal CalcularCustoTotal()
     {
-        return ObterSubtotalProdutos() + ObterCustoEnvio();
+        return CalcularSubtotal() + ObterTaxaEnvio();
     }
 
-    public string ObterEtiquetaEmbalagem()
+    public string GerarEtiquetaEmbalagem()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("=== ETIQUETA DE EMBALAGEM ===");
-        foreach (Produto produto in _produtos)
+        StringBuilder etiqueta = new StringBuilder();
+        etiqueta.AppendLine("--- ETIQUETA DE EMBALAGEM ---");
+        foreach (Produto item in _itensPedido)
         {
-            sb.AppendLine($"• Produto: {produto.ObterNome()} | ID: {produto.ObterIdProduto()} (Qtd: {produto.ObterQuantidade()})");
+            etiqueta.AppendLine($"Item: {item.ObterNome()} | Código/ID: {item.ObterId()}");
         }
-        return sb.ToString().TrimEnd();
+        return etiqueta.ToString().TrimEnd();
     }
 
-    public string ObterEtiquetaEnvio()
+    public string GerarEtiquetaEnvio()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("=== ETIQUETA DE ENVIO ===");
-        sb.AppendLine($"Destinatário: {_cliente.ObterNome()}");
-        sb.AppendLine("Endereço de Entrega:");
-        sb.AppendLine(_cliente.ObterEndereco().ObterEnderecoCompleto());
-        return sb.ToString().TrimEnd();
-    }
-
-    public List<Produto> ObterProdutos()
-    {
-        return _produtos;
+        StringBuilder etiqueta = new StringBuilder();
+        etiqueta.AppendLine("--- ETIQUETA DE ENVIO ---");
+        etiqueta.AppendLine($"Destinatário: {_clienteDestinatario.ObterNome()}");
+        etiqueta.AppendLine("Endereço:");
+        etiqueta.AppendLine(_clienteDestinatario.ObterEndereco().ObterEnderecoFormatado());
+        return etiqueta.ToString().TrimEnd();
     }
 
     public Cliente ObterCliente()
     {
-        return _cliente;
+        return _clienteDestinatario;
+    }
+
+    public List<Produto> ObterItens()
+    {
+        return _itensPedido;
     }
 }
