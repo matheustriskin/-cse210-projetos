@@ -3,58 +3,58 @@ using System.Collections.Generic;
 
 public class AtividadeDeReflexao : Atividade
 {
-    private List<string> _mensagens = new List<string>()
-    {
-        "Pense em uma ocasião em que você defendeu outra pessoa.",
-        "Pense em uma ocasião em que você fez algo realmente difícil.",
-        "Pense em uma ocasião em que você ajudou alguém necessitado.",
-        "Pense em uma ocasião em que você fez algo verdadeiramente altruísta."
-    };
-
-    private List<string> _perguntas = new List<string>()
-    {
-        "Por que essa experiência foi significativa para você?",
-        "Você já fez algo assim antes?",
-        "Como você começou?",
-        "Como você se sentiu quando terminou?",
-        "O que tornou esse momento diferente de outras vezes em que você não teve tanto sucesso?",
-        "Qual é a sua coisa favorita sobre essa experiência?",
-        "O que você pode aprender com essa experiência que se aplica a outras situações?",
-        "O que você aprendeu sobre si mesmo por meio dessa experiência?",
-        "Como você pode manter essa experiência em mente no futuro?"
-    };
-
-    private Random _random = new Random();
+    private List<string> _temas;
+    private List<string> _questionamentos;
+    private Random _sorteador;
 
     public AtividadeDeReflexao() : base(
         "Atividade de Reflexão",
-        "Esta atividade ajudará você a refletir sobre momentos da sua vida em que você demonstrou força e resiliência. Isso ajudará você a reconhecer o poder que você tem e como pode usá-lo em outros aspectos da sua vida.")
+        "Esta atividade convida você a meditar sobre momentos da sua trajetória em que você demonstrou coragem e determinação, ajudando a reconhecer seus pontos fortes e potenciais.")
     {
+        _sorteador = new Random();
+
+        _temas = new List<string>()
+        {
+            "Pense em uma ocasião em que você precisou superar o medo para fazer o que era correto.",
+            "Lembre-se de um momento difícil em que você perseverou e não desistiu.",
+            "Recorde um episódio em que você ofereceu apoio a alguém que estava passando por dificuldades.",
+            "Pense em uma conquista que exigiu esforço e dedicação genuínos de sua parte."
+        };
+
+        _questionamentos = new List<string>()
+        {
+            "O que tornou essa vivência tão marcante para você?",
+            "Qual foi o seu maior desafio no início dessa situação?",
+            "Como você se sentiu ao perceber o resultado da sua atitude?",
+            "O que você descobriu a respeito da sua própria capacidade com essa experiência?",
+            "Quais lições aprendidas nessa ocasião podem ajudar você nos desafios de hoje?",
+            "Se passasse pela mesma situação novamente, o que manteria igual?",
+            "De que forma essa memória pode servir de motivação para o seu futuro?",
+            "Quem mais percebeu ou foi influenciado positivamente por essa sua postura?"
+        };
     }
 
     public void Executar()
     {
         ExibirMensagemInicial();
 
-        string mensagem = ObterMensagemAleatoria();
-        Console.WriteLine("Considere o seguinte aviso:");
-        Console.WriteLine();
-        Console.WriteLine($" --- {mensagem} --- ");
-        Console.WriteLine();
-        Console.WriteLine("Quando você tiver algo em mente, pressione enter para continuar.");
+        string temaEscolhido = ObterTemaAleatorio();
+        Console.WriteLine("Pense a respeito do seguinte tema:");
+        Console.WriteLine($"\n  --- \"{temaEscolhido}\" ---\n");
+        Console.WriteLine("Assim que tiver refletido sobre uma situação específica, pressione [Enter] para prosseguir.");
         Console.ReadLine();
 
-        Console.WriteLine("Agora reflita sobre cada uma das seguintes perguntas relacionadas a esta experiência.");
-        Console.Write("Você pode começar em: ");
+        Console.WriteLine("Agora, avalie com atenção as questões a seguir:");
+        Console.Write("A atividade começará em: ");
         ExibirContagemRegressiva(5);
         Console.Clear();
 
-        DateTime fim = DateTime.Now.AddSeconds(_duracao);
+        DateTime horarioTermino = DateTime.Now.AddSeconds(ObterDuracao());
 
-        while (DateTime.Now < fim)
+        while (DateTime.Now < horarioTermino)
         {
-            string pergunta = ObterPerguntaAleatoria();
-            Console.Write($"> {pergunta} ");
+            string questao = ObterQuestionamentoAleatorio();
+            Console.Write($"\n> {questao} ");
             ExibirAnimacao(5);
             Console.WriteLine();
         }
@@ -62,15 +62,15 @@ public class AtividadeDeReflexao : Atividade
         ExibirMensagemFinal();
     }
 
-    private string ObterMensagemAleatoria()
+    private string ObterTemaAleatorio()
     {
-        int indice = _random.Next(_mensagens.Count);
-        return _mensagens[indice];
+        int indice = _sorteador.Next(_temas.Count);
+        return _temas[indice];
     }
 
-    private string ObterPerguntaAleatoria()
+    private string ObterQuestionamentoAleatorio()
     {
-        int indice = _random.Next(_perguntas.Count);
-        return _perguntas[indice];
+        int indice = _sorteador.Next(_questionamentos.Count);
+        return _questionamentos[indice];
     }
 }

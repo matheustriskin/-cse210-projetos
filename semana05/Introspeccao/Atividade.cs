@@ -1,71 +1,78 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 public class Atividade
 {
     private string _nome;
     private string _descricao;
-    protected int _duracao;
+    private int _duracao;
 
     public Atividade(string nome, string descricao)
     {
         _nome = nome;
         _descricao = descricao;
+        _duracao = 0;
+    }
+
+    public int ObterDuracao()
+    {
+        return _duracao;
+    }
+
+    public string ObterNome()
+    {
+        return _nome;
     }
 
     public void ExibirMensagemInicial()
     {
         Console.Clear();
-        Console.WriteLine($"Bem-vindo à {_nome}.");
-        Console.WriteLine();
+        Console.WriteLine($"Seja bem-vindo(a) à {_nome}!\n");
         Console.WriteLine(_descricao);
         Console.WriteLine();
-        Console.Write("Quanto tempo, em segundos, você gostaria para sua sessão? ");
-        _duracao = int.Parse(Console.ReadLine());
+        Console.Write("Por quantos segundos deseja realizar esta sessão? ");
+
+        if (!int.TryParse(Console.ReadLine(), out _duracao) || _duracao <= 0)
+        {
+            _duracao = 10;
+        }
 
         Console.Clear();
-        Console.WriteLine("Prepare-se...");
+        Console.Write("Iniciando a atividade... ");
         ExibirAnimacao(3);
-        Console.WriteLine();
+        Console.WriteLine("\n");
     }
 
     public void ExibirMensagemFinal()
     {
-        Console.WriteLine();
-        Console.WriteLine("Bom trabalho!");
+        Console.WriteLine("\nExcelente trabalho!");
+        ExibirAnimacao(3);
+        Console.WriteLine($"\nVocê finalizou a {_nome} com duração total de {_duracao} segundos.");
         ExibirAnimacao(3);
         Console.WriteLine();
-        Console.WriteLine($"Você concluiu mais {_duracao} segundos da {_nome}.");
-        ExibirAnimacao(3);
     }
 
     public void ExibirAnimacao(int segundos)
     {
-        List<string> animacao = new List<string>() { "|", "/", "-", "\\" };
-        DateTime fim = DateTime.Now.AddSeconds(segundos);
-        int i = 0;
+        string[] quadros = { "/", "-", "\\", "|" };
+        DateTime limite = DateTime.Now.AddSeconds(segundos);
+        int indice = 0;
 
-        while (DateTime.Now < fim)
+        while (DateTime.Now < limite)
         {
-            string s = animacao[i];
-            Console.Write(s);
+            Console.Write(quadros[indice]);
             Thread.Sleep(250);
             Console.Write("\b \b");
 
-            i++;
-            if (i >= animacao.Count)
-            {
-                i = 0;
-            }
+            indice = (indice + 1) % quadros.Length;
         }
     }
 
     public void ExibirContagemRegressiva(int segundos)
     {
-        for (int i = segundos; i > 0; i--)
+        for (int contagem = segundos; contagem > 0; contagem--)
         {
-            Console.Write(i);
+            Console.Write(contagem);
             Thread.Sleep(1000);
             Console.Write("\b \b");
         }

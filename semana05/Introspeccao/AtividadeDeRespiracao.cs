@@ -4,7 +4,7 @@ public class AtividadeDeRespiracao : Atividade
 {
     public AtividadeDeRespiracao() : base(
         "Atividade de Respiração",
-        "Esta atividade ajudará você a relaxar, inspirando e expirando lentamente. Limpe sua mente e concentre-se na sua respiração.")
+        "Esta atividade tem como objetivo promover o relaxamento por meio de respirações compassadas. Busque esvaziar os pensamentos e acompanhar o ritmo indicado.")
     {
     }
 
@@ -12,18 +12,19 @@ public class AtividadeDeRespiracao : Atividade
     {
         ExibirMensagemInicial();
 
-        DateTime fim = DateTime.Now.AddSeconds(_duracao);
+        int segundosInspirar = 4;
+        int segundosExpirar = 6;
+        DateTime momentoTermino = DateTime.Now.AddSeconds(ObterDuracao());
 
-        while (DateTime.Now < fim)
+        while (DateTime.Now < momentoTermino)
         {
-            Console.Write("Inspire... ");
-            ExibirContagemRegressiva(4);
+            Console.Write("Puxe o ar profundamente... ");
+            ExibirContagemRegressiva(segundosInspirar);
             Console.WriteLine();
 
-            Console.Write("Expire... ");
-            ExibirContagemRegressiva(6);
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.Write("Solte o ar lentamente... ");
+            ExibirContagemRegressiva(segundosExpirar);
+            Console.WriteLine("\n");
         }
 
         ExibirMensagemFinal();

@@ -4,33 +4,47 @@ class Program
 {
     static void Main(string[] args)
     {
-        string opcao = "";
+        bool executando = true;
 
-        while (opcao != "4")
+        while (executando)
         {
             Console.Clear();
+            Console.WriteLine("=== Programa de Introspecção ===");
             Console.WriteLine("Opções de Menu:");
-            Console.WriteLine("  1. Iniciar atividade de respiração");
-            Console.WriteLine("  2. Iniciar atividade de reflexão");
-            Console.WriteLine("  3. Iniciar atividade de listagem");
+            Console.WriteLine("  1. Iniciar Atividade de Respiração");
+            Console.WriteLine("  2. Iniciar Atividade de Reflexão");
+            Console.WriteLine("  3. Iniciar Atividade de Listagem");
             Console.WriteLine("  4. Sair");
-            Console.Write("Escolha uma opção do menu: ");
-            opcao = Console.ReadLine();
+            Console.Write("\nSelecione uma opção (1-4): ");
 
-            if (opcao == "1")
+            string escolha = Console.ReadLine()?.Trim();
+
+            switch (escolha)
             {
-                AtividadeDeRespiracao respiracao = new AtividadeDeRespiracao();
-                respiracao.Executar();
-            }
-            else if (opcao == "2")
-            {
-                AtividadeDeReflexao reflexao = new AtividadeDeReflexao();
-                reflexao.Executar();
-            }
-            else if (opcao == "3")
-            {
-                AtividadeDeListagem listagem = new AtividadeDeListagem();
-                listagem.Executar();
+                case "1":
+                    AtividadeDeRespiracao respiracao = new AtividadeDeRespiracao();
+                    respiracao.Executar();
+                    break;
+
+                case "2":
+                    AtividadeDeReflexao reflexao = new AtividadeDeReflexao();
+                    reflexao.Executar();
+                    break;
+
+                case "3":
+                    AtividadeDeListagem listagem = new AtividadeDeListagem();
+                    listagem.Executar();
+                    break;
+
+                case "4":
+                    executando = false;
+                    Console.WriteLine("\nEncerrando o programa. Bom descanso!");
+                    break;
+
+                default:
+                    Console.WriteLine("\nOpção inválida! Pressione qualquer tecla para continuar.");
+                    Console.ReadKey();
+                    break;
             }
         }
     }
